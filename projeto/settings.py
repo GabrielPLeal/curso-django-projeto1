@@ -57,6 +57,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'base_templates',
+            BASE_DIR / 'recipes' / 'templates_temp' / 'me-apague'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
