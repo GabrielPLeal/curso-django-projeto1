@@ -13,4 +13,4 @@ def sobre(request: object) -> HttpResponse:
 
 
 def contato(request: object) -> HttpResponse:
-    return render(request, 'temp.html')
+    return render(request, 'recipes/contato.html')
