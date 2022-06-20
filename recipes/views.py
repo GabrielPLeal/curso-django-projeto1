@@ -12,4 +12,5 @@ def home(request: object) -> HttpResponse:
 def recipe(request: object, id: int) -> HttpResponse:
     return render(request, 'recipes/pages/recipe_view.html', context={
         'recipe': make_recipe(),
+        'is_detail_page': True
     })
