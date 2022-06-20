@@ -7,4 +7,4 @@ def home(request: object) -> HttpResponse:
 
 
 def recipe(request: object, id: int) -> HttpResponse:
-    return render(request, 'recipes/pages/home.html')
+    return render(request, 'recipes/pages/recipe_view.html')
