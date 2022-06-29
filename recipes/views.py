@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 # from utils.recipes.factory import make_recipe
 from .models import Recipe
-from django.http import HttpResponseNotFound
+from django.http import Http404
 
 
 def home(request: object) -> HttpResponse:
@@ -19,8 +19,13 @@ def category(request: object, category_id: int) -> HttpResponse:
         category__id=category_id,
         is_published=True
         ).order_by('-id')
+    if not recipes:
+        raise Http404('Not Found')
+
+    title = f'{recipes.first().category.name} - Category | '
     return render(request, 'recipes/pages/category.html', context={
         'recipes': recipes,
+        'title': title
     })
 
 
@@ -30,10 +35,10 @@ def recipe(request: object, id: int) -> HttpResponse:
         is_published=True
         ).first()
 
-    if recipe:
-        return render(request, 'recipes/pages/recipe_view.html', context={
-            'recipe': recipe,
-            'is_detail_page': True
-        })
-    else:
-        return HttpResponseNotFound()
+    if not recipe:
+        raise Http404('Not Found')
+
+    return render(request, 'recipes/pages/recipe_view.html', context={
+        'recipe': recipe,
+        'is_detail_page': True
+    })
